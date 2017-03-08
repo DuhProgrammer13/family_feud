@@ -2,11 +2,16 @@ import pygame
 from pygame.locals import *
 from pygame.time import *
 import helper
+import threading
+import json
+import urllib
+import time
 
 pygame.init()
 
 c = Clock()
 d = pygame.display.set_mode(helper.get_screen_size(), FULLSCREEN | HWACCEL)
+running = True
 print helper.get_screen_size()
 im = helper.ImageManager()
 
@@ -86,10 +91,43 @@ class Game:
 
 g = Game()
 
+
+class myThread (threading.Thread):
+    def __init__(self, game):
+        threading.Thread.__init__(self)
+        self.game = game
+        self.animating = []
+
+    def run(self):
+        while running:
+            try:
+                url = "http://kody-thinkpad/get_clicked"
+                data = json.load(urllib.urlopen(url))
+                for answer in data["answers"]:
+                    if answer not in self.animating:
+                        self.animating.append(answer)
+                        self.game.animate(int(answer))
+                to_delete = []
+                for animation in self.animating:
+                    if animation not in data["answers"]:
+                        to_delete.append(animation)
+                for tod in to_delete:
+                    self.animating.remove(tod)
+                time.sleep(0.2)
+            except Exception as e:
+                print str(e)
+                print "Skipped a frame"
+
+
+thread = myThread(g)
+thread.start()
+
+
 while True:
     for event in pygame.event.get():
         if event.type == pygame.KEYDOWN:
             if event.key == K_q:
+                running = False
                 pygame.quit()
                 exit()
             elif event.key in [K_1, K_2, K_3, K_4, K_5, K_6, K_7, K_8]:
