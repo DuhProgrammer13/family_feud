@@ -101,9 +101,10 @@ class myThread (threading.Thread):
     def run(self):
         while running:
             try:
-                url = "http://kody-thinkpad/get_clicked"
+                url = "http://192.168.1.101/api/game"
                 data = json.load(urllib.urlopen(url))
-                for answer in data["answers"]:
+                for _answer in data["answers"]:
+                    answer = int(_answer["id"])
                     if answer not in self.animating:
                         self.animating.append(answer)
                         self.game.animate(int(answer))
