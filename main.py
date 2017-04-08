@@ -106,20 +106,14 @@ class myThread (threading.Thread):
                 data = json.load(urllib.urlopen(url))
                 for _answer in data["answers"]:
                     answer = int(_answer["id"])
-                    if answer not in self.animating and answer not in self.animated and answer["answered"]:
+                    if answer not in self.animating and answer not in self.animated and boolean(answer["answered"]):
+                        print answer
+                        print _answer
                         self.animating.append(answer)
                         self.game.animate(int(answer))
-                to_delete = []
-                for animation in self.animating:
-                    if animation not in data["answers"]:
-                        to_delete.append(animation)
-                for tod in to_delete:
-                    self.animated.append(animation)
-                    self.animating.remove(tod)
-                time.sleep(0.2)
+                time.sleep(0.5)
             except Exception as e:
-                print str(e)
-                print "Skipped a frame"
+                tim.sleep(1)
 
 
 thread = myThread(g)
