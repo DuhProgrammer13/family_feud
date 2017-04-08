@@ -97,6 +97,7 @@ class myThread (threading.Thread):
         threading.Thread.__init__(self)
         self.game = game
         self.animating = []
+        self.animated = []
 
     def run(self):
         while running:
@@ -105,7 +106,7 @@ class myThread (threading.Thread):
                 data = json.load(urllib.urlopen(url))
                 for _answer in data["answers"]:
                     answer = int(_answer["id"])
-                    if answer not in self.animating:
+                    if answer not in self.animating and answer not in self.animated:
                         self.animating.append(answer)
                         self.game.animate(int(answer))
                 to_delete = []
@@ -113,6 +114,7 @@ class myThread (threading.Thread):
                     if animation not in data["answers"]:
                         to_delete.append(animation)
                 for tod in to_delete:
+                    self.animated.append(animation)
                     self.animating.remove(tod)
                 time.sleep(0.2)
             except Exception as e:
