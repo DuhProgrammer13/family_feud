@@ -106,7 +106,7 @@ class myThread (threading.Thread):
                 data = json.load(urllib.urlopen(url))
                 for _answer in data["answers"]:
                     answer = int(_answer["id"])
-                    if answer not in self.animating and answer not in self.animated:
+                    if answer not in self.animating and answer not in self.animated and answer["answered"]:
                         self.animating.append(answer)
                         self.game.animate(int(answer))
                 to_delete = []
