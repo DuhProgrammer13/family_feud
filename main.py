@@ -80,16 +80,16 @@ class Game:
             answer.update()
 
     def animate(self, answer_to_animate):
-        self.answers[answer_to_animate].animate()
-
-    def animate(self, answer_to_animate):
-        answer = self.answers[answer_to_animate["id"]]
-        answer.value = answer_to_animate["value"]
-        answer.answer = answer_to_animate["answer"]
-        answer.animate()
-        # answer_id = answer_to_animate["id"]
-        # self.answers[answer_id]
-        # self.answers[answer_to_animate["id"]].animate()
+        if isinstance(answer_to_animate, int):
+            self.answers[answer_to_animate].animate()
+        else:
+            answer = self.answers[answer_to_animate["id"]]
+            answer.value = answer_to_animate["value"]
+            answer.answer = answer_to_animate["answer"]
+            answer.animate()
+            # answer_id = answer_to_animate["id"]
+            # self.answers[answer_id]
+            # self.answers[answer_to_animate["id"]].animate()
 
     def draw(self, display):
         for x in range(8):
