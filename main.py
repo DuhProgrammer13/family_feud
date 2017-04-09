@@ -104,7 +104,9 @@ class Game:
                 display.blit(text, (helper.get_answer_size()[0] / 2 - text.get_width() / 2,
                                     helper.get_screen_size()[1] -
                                     helper.get_answer_size()[1] * 4 +
-                                    helper.get_answer_size()[1] * x))
+                                    helper.get_answer_size()[1] * x +
+                                    helper.get_answer_size()[1] / 2 -
+                                    text.get_height() / 2))
                 # display.blit(self.answers[x], (0,
                 #                                helper.get_screen_size()[1] -
                 #                                helper.get_answer_size()[1] * 4 +
@@ -119,7 +121,7 @@ class Game:
 g = Game()
 
 
-class myThread(threading.Thread):
+class MyThread(threading.Thread):
     def __init__(self, game):
         threading.Thread.__init__(self)
         self.game = game
@@ -143,7 +145,7 @@ class myThread(threading.Thread):
                 time.sleep(1)
 
 
-thread = myThread(g)
+thread = MyThread(g)
 thread.start()
 
 while True:
