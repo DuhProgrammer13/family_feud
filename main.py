@@ -137,7 +137,7 @@ class myThread(threading.Thread):
                         print answer
                         print _answer
                         self.animating.append(answer)
-                        self.game.animate(int(answer))
+                        self.game.animate(_answer)
                 time.sleep(0.5)
             except Exception as e:
                 time.sleep(1)
