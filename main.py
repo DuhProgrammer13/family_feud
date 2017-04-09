@@ -99,9 +99,9 @@ class Game:
                                                helper.get_answer_size()[1] * 4 +
                                                helper.get_answer_size()[1] * x))
 
-                font = pygame.font.Font(None, 36)
-                text = font.render(self.answers[x].answer, 1, (255, 255, 255))
-                display.blit(text, (0,
+                font = pygame.font.Font(None, 72)
+                text = font.render(self.answers[x].answer.upper(), 1, (255, 255, 255))
+                display.blit(text, (helper.get_answer_size()[0] / 2 - text.get_width() / 2,
                                     helper.get_screen_size()[1] -
                                     helper.get_answer_size()[1] * 4 +
                                     helper.get_answer_size()[1] * x))
