@@ -63,9 +63,14 @@ class Answer(pygame.Surface):
 
 class Game:
     def __init__(self):
-        self.answer_strings = ["mj" for _ in range(0, 8)]
+        self.answer_strings = []
         self.answers = []
-        self.build_answers()
+        self.wrong_answers = 0
+        self.size = helper.get_screen_size()
+
+    def reset(self):
+        self.answer_strings = []
+        self.answers = []
         self.wrong_answers = 0
         self.size = helper.get_screen_size()
 
@@ -95,18 +100,18 @@ class Game:
         for x in range(8):
             if x < 4:
                 display.blit(self.answers[x], (0,
-                                               helper.get_screen_size()[1] -
-                                               helper.get_answer_size()[1] * 4 +
-                                               helper.get_answer_size()[1] * x))
-
-                font = pygame.font.Font(None, 72)
-                text = font.render(self.answers[x].answer.upper(), 1, (255, 255, 255))
-                display.blit(text, (helper.get_answer_size()[0] / 2 - text.get_width() / 2,
-                                    helper.get_screen_size()[1] -
-                                    helper.get_answer_size()[1] * 4 +
-                                    helper.get_answer_size()[1] * x +
-                                    helper.get_answer_size()[1] / 2 -
-                                    text.get_height() / 2))
+                                               self.size[1] -
+                                               self.size[1] * 4 +
+                                               self.size[1] * x))
+                if self.answers[x].current_image >= 23:
+                    font = pygame.font.Font(None, 72)
+                    text = font.render(self.answers[x].answer.upper(), 1, (255, 255, 255, 128))
+                    display.blit(text, (self.size[0] / 2 - text.get_width() / 2,
+                                        self.size[1] -
+                                        self.size[1] * 4 +
+                                        self.size[1] * x +
+                                        self.size[1] / 2 -
+                                        text.get_height() / 2))
                 # display.blit(self.answers[x], (0,
                 #                                helper.get_screen_size()[1] -
                 #                                helper.get_answer_size()[1] * 4 +
@@ -135,6 +140,10 @@ class MyThread(threading.Thread):
                 data = json.load(urllib.urlopen(url))
                 for _answer in data["answers"]:
                     answer = int(_answer["id"])
+                    if _answer["answer"] not in self.game.answer_strings and _answer["id"] < self.game.answer_strings:
+                        self.game.reset()
+                    if _answer["answer"] not in self.game.answer_strings:
+                        self.game.answer_strings.append(_answer["answer"])
                     if answer not in self.animating and answer not in self.animated and _answer["answered"]:
                         print answer
                         print _answer

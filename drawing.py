@@ -3,6 +3,7 @@
 import pygame
 from pygame.draw import *
 
+
 class Tile(pygame.Surface):
 
     def __init__(self, width, height):
