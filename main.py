@@ -68,7 +68,8 @@ class Game:
         self.wrong_answers = 0
         self.size = helper.get_screen_size()
         self.blank_image = pygame.image.load("images/num0/0001.png")
-        self.blank_image = pygame.transform.scale(self.blank_image, (int(helper.get_answer_size()[0]), int(helper.get_answer_size()[1])))
+        self.blank_image = pygame.transform.scale(self.blank_image,
+                                                  (int(helper.get_answer_size()[0]), int(helper.get_answer_size()[1])))
 
     def reset(self):
         self.answer_strings = []
@@ -120,10 +121,10 @@ class Game:
                         #                                helper.get_answer_size()[1] * 4 +
                         #                                helper.get_answer_size()[1] * x))
                 else:
-                    display.blit(self.blank_image, (helper.get_answer_size()[0],
-                                                    helper.get_screen_size()[1] -
-                                                    helper.get_answer_size()[1] * 4 +
-                                                    helper.get_answer_size()[1] * (x - 4)))
+                    display.blit(self.blank_image, (0,
+                                                    self.size[1] -
+                                                    self.size[1] * 4 +
+                                                    self.size[1] * x))
             else:
                 display.blit(self.blank_image, (helper.get_answer_size()[0],
                                                 helper.get_screen_size()[1] -
