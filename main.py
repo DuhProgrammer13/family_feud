@@ -99,23 +99,24 @@ class Game:
     def draw(self, display):
         for x in range(8):
             if x < 4:
-                display.blit(self.answers[x], (0,
-                                               self.size[1] -
-                                               self.size[1] * 4 +
-                                               self.size[1] * x))
-                if self.answers[x].current_image >= 23:
-                    font = pygame.font.Font(None, 72)
-                    text = font.render(self.answers[x].answer.upper(), 1, (255, 255, 255, 128))
-                    display.blit(text, (self.size[0] / 2 - text.get_width() / 2,
-                                        self.size[1] -
-                                        self.size[1] * 4 +
-                                        self.size[1] * x +
-                                        self.size[1] / 2 -
-                                        text.get_height() / 2))
-                # display.blit(self.answers[x], (0,
-                #                                helper.get_screen_size()[1] -
-                #                                helper.get_answer_size()[1] * 4 +
-                #                                helper.get_answer_size()[1] * x))
+                if len(self.answers) > x:
+                    display.blit(self.answers[x], (0,
+                                                   self.size[1] -
+                                                   self.size[1] * 4 +
+                                                   self.size[1] * x))
+                    if self.answers[x].current_image >= 23:
+                        font = pygame.font.Font(None, 72)
+                        text = font.render(self.answers[x].answer.upper(), 1, (255, 255, 255, 128))
+                        display.blit(text, (self.size[0] / 2 - text.get_width() / 2,
+                                            self.size[1] -
+                                            self.size[1] * 4 +
+                                            self.size[1] * x +
+                                            self.size[1] / 2 -
+                                            text.get_height() / 2))
+                    # display.blit(self.answers[x], (0,
+                    #                                helper.get_screen_size()[1] -
+                    #                                helper.get_answer_size()[1] * 4 +
+                    #                                helper.get_answer_size()[1] * x))
             else:
                 display.blit(self.answers[x], (helper.get_answer_size()[0],
                                                helper.get_screen_size()[1] -
