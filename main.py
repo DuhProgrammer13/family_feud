@@ -68,7 +68,7 @@ class Game:
         self.wrong_answers = 0
         self.size = helper.get_screen_size()
         self.blank_image = pygame.image.load("images/num0/0001.png")
-        self.blank_image = pygame.transform.scale(self.blank_image, helper.get_ff_size(self.blank_image))
+        self.blank_image = pygame.transform.scale(self.blank_image, helper.get_answer_size())
 
     def reset(self):
         self.answer_strings = []
