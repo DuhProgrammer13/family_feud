@@ -65,6 +65,7 @@ class Game:
     def __init__(self):
         self.answer_strings = []
         self.answers = []
+        self.build_answers()
         self.wrong_answers = 0
         self.size = helper.get_screen_size()
         self.blank_image = pygame.image.load("images/num0/0001.png")
@@ -82,6 +83,7 @@ class Game:
         for answer in self.answer_strings:
             x += 1
             self.answers.append(Answer(helper.get_answer_size()[0], helper.get_answer_size()[1], x, answer))
+        self.answers.append(Answer(helper.get_answer_size()[0], helper.get_answer_size()[1], 1, "Hi"))
 
     def update(self):
         for answer in self.answers:
@@ -116,10 +118,6 @@ class Game:
                                             self.size[1] * x +
                                             self.size[1] / 2 -
                                             text.get_height() / 2))
-                        # display.blit(self.answers[x], (0,
-                        #                                helper.get_screen_size()[1] -
-                        #                                helper.get_answer_size()[1] * 4 +
-                        #                                helper.get_answer_size()[1] * x))
                 else:
                     display.blit(self.blank_image, (0,
                                                     self.size[1] -
