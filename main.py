@@ -63,7 +63,7 @@ class Answer(pygame.Surface):
 
 class Game:
     def __init__(self):
-        self.answer_strings = []
+        self.answer_strings = ["mj" for _ in range(8)]
         self.answers = []
         self.build_answers()
         self.wrong_answers = 0
