@@ -2,7 +2,7 @@ import pygame
 from pygame.locals import *
 from pygame.time import *
 import helper
-import threading
+import multiprocessing
 import json
 import urllib
 import time
@@ -152,9 +152,9 @@ class Game:
 g = Game()
 
 
-class MyThread(threading.Thread):
+class MyThread(multiprocessing.Process):
     def __init__(self, game):
-        threading.Thread.__init__(self)
+        multiprocessing.Process.__init__(self)
         self.game = game
         self.animating = []
         self.animated = []
