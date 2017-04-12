@@ -119,6 +119,7 @@ class Game:
                                             self.size[1] / 2 -
                                             text.get_height() / 2))
                 else:
+                    print "%d".format(x)
                     display.blit(self.blank_image, (0,
                                                     self.size[1] -
                                                     self.size[1] * 4 +
