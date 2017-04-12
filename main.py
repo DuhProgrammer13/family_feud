@@ -63,9 +63,8 @@ class Answer(pygame.Surface):
 
 class Game:
     def __init__(self):
-        self.answer_strings = ["mj" for _ in range(8)]
+        self.answer_strings = []
         self.answers = []
-        self.build_answers()
         self.wrong_answers = 0
         self.size = helper.get_screen_size()
         self.blank_image = pygame.image.load("images/num0/0001.png")
@@ -168,6 +167,9 @@ class MyThread(threading.Thread):
                 for _answer in data["answers"]:
                     answer = int(_answer["id"])
                     if _answer["answer"] not in self.game.answer_strings and _answer["id"] < len(self.game.answer_strings):
+                        print "Oh Shit"
+                        print _answer
+                        print len(self.game.answer_strings)
                         self.game.reset()
                     if _answer["answer"] not in self.game.answer_strings:
                         self.game.answer_strings.append(_answer["answer"])
@@ -176,6 +178,7 @@ class MyThread(threading.Thread):
                                    helper.get_answer_size()[1],
                                    len(self.game.answer_strings),
                                    _answer["answer"]))
+                        print "Is this progress"
                     if answer not in self.animating and answer not in self.animated and _answer["answered"]:
                         print answer
                         print _answer
@@ -183,7 +186,7 @@ class MyThread(threading.Thread):
                         self.game.animate(_answer)
                 time.sleep(0.5)
             except Exception as e:
-                time.sleep(1)
+                time.sleep(0.5)
 
 
 thread = MyThread(g)
