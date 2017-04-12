@@ -111,17 +111,17 @@ class Game:
                 if len(self.answers) > x:
                     print("%d" % x)
                     display.blit(self.answers[x], (0,
-                                                   self.size[1] -
-                                                   self.size[1] * 4 +
-                                                   self.size[1] * (x - 4)))
+                                                   helper.get_screen_size()[1] -
+                                                   helper.get_answer_size()[1] * 4 +
+                                                   helper.get_answer_size()[1] * (x - 4)))
                     if self.answers[x].current_image >= 23:
                         font = pygame.font.Font(None, 72)
                         text = font.render(self.answers[x].answer.upper(), 1, (255, 255, 255, 128))
                         display.blit(text, (self.size[0] / 2 - text.get_width() / 2,
-                                            self.size[1] -
-                                            self.size[1] * 4 +
-                                            self.size[1] * x +
-                                            self.size[1] / 2 -
+                                            helper.get_screen_size()[1] -
+                                            helper.get_answer_size()[1] * 4 +
+                                            helper.get_answer_size()[1] * x +
+                                            helper.get_answer_size()[1] / 2 -
                                             text.get_height() / 2))
                 # else:
                 #     print("%d" % x)
