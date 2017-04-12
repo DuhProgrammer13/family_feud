@@ -109,6 +109,7 @@ class Game:
                 #                                self.size[1] * 4 +
                 #                                self.size[1] * x))
                 if len(self.answers) > x:
+                    print("%d" % x)
                     display.blit(self.answers[x], (0,
                                                    self.size[1] -
                                                    self.size[1] * 4 +
