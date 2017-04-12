@@ -164,7 +164,9 @@ class MyThread(threading.Thread):
             try:
                 url = "http://192.168.1.101/api/game"
                 data = json.load(urllib.urlopen(url))
+                print "---------"
                 for _answer in data["answers"]:
+                    print " - "
                     answer = int(_answer["id"])
                     if _answer["answer"] not in self.game.answer_strings and _answer["id"] < len(self.game.answer_strings):
                         print "Oh Shit"
@@ -184,8 +186,7 @@ class MyThread(threading.Thread):
                         print _answer
                         self.animating.append(answer)
                         self.game.animate(_answer)
-                time.sleep(0.5)
-            except Exception as e:
+            finally:
                 time.sleep(0.5)
 
 
